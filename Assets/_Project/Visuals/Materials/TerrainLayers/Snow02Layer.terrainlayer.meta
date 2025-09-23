@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0b86a28bef299524cb1f29f68d089d0c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 240055
+  packageName: Cartoon Army Universe
+  packageVersion: 1.0
+  assetPath: Assets/CartoonArmyUniverse/Materials/TerrainLayers/Snow02Layer.terrainlayer
+  uploadId: 545653

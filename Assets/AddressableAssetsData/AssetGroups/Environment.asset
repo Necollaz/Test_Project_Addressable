@@ -1,0 +1,235 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Environment
+  m_EditorClassIdentifier: 
+  m_GroupName: Environment
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 9cae46ef37401674987f910e310ba419
+  m_SerializeEntries:
+  - m_GUID: 38547c9ee4866884dae65bc5306be0c0
+    m_Address: terrain/rock/kv-01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79d8a744e8e2a3548b38356d51c25931
+    m_Address: terrain/pine/kv-04
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e21234eb4bc123542af5310970627422
+    m_Address: terrain/pine/kv-01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73357757dc682c144b7eef123c76ad80
+    m_Address: terrain/rock/kv-05
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4353808c00443347b33c7561d93bde4
+    m_Address: terrain/rock/kv-11
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93b0b1bd10bd0bb49b88b0a034d41f9a
+    m_Address: terrain/rock/kv-12
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72408e43d955cb94ab41a2c898d54217
+    m_Address: terrain/rock/kv-09
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d783a7465ea4c08489340ee79037ed4e
+    m_Address: terrain/pine/kv-03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c784a10bce6597d4cb260f41d755c3af
+    m_Address: terrain/rock/kv-03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb6172ad7bd1b044fb72d3f1a50d8e38
+    m_Address: terrain/rock/kv-07
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d864de6ecd5be3643a6ef95e73a7cfe9
+    m_Address: terrain/rock/kv-21
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67ddf0c3d635e774098b2d891f3e600e
+    m_Address: terrain/rock/kv-14
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3159a94a8a18afd4c8156d29edb51308
+    m_Address: terrain/rock/kv-15
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b85818003214b8419805f46ee9d766c
+    m_Address: terrain/rock/kv-19
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70b0294410073854498390b39fc4f87e
+    m_Address: terrain/rock/kv-02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b84fb34725031be42b9e279e2f2e6f41
+    m_Address: terrain/palm/kv-03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b16f3da5b27bd34b821c628e73e2ef5
+    m_Address: terrain/block/kv-02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f78b2330ec9479444978f5df0ef33f56
+    m_Address: terrain/pine/kv-04
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b905c35f39a88644f85e745b7306c753
+    m_Address: terrain/grass/kv-02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a4f29154f5009441878bb83b5a5a98d
+    m_Address: terrain/palm/kv-02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b29c078b6a27b947aa7f59a9da2e95d
+    m_Address: terrain/rock/kv-22
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 360e4604101aaf04eb7998d0c8263c3c
+    m_Address: terrain/rock/kv-13
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76559546040bae5488bdaae79fc238fb
+    m_Address: terrain/bridge/kv-01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c8b7860784010944aecb07edb32c284
+    m_Address: terrain/grass/kv-03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91760d30c5be1e940bd97506f673186a
+    m_Address: terrain/plant/kv-01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0b9340ec06c0fe4197a72d80c834016
+    m_Address: terrain/pine/kv-05
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73e17610326265b4395e6c678a07d5b5
+    m_Address: terrain/rock/kv-06
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a4ace047639cdc4f878c67e7a121a59
+    m_Address: terrain/palm/kv-01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 250aa3a632044564d8397fc0b2d5162b
+    m_Address: terrain/bridge/kv-02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 560ecb6975e48e14b879e04b59661260
+    m_Address: terrain/block/kv-01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7f49f47f52763540b59ca886c4da646
+    m_Address: terrain/bush/kv-01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0d9a426c830cb14da03f0a1b4fee710
+    m_Address: terrain/rock/kv-18
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05a17b76a136d9b4f9ca9ea896052c82
+    m_Address: terrain/rock/kv-16
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73e0a01f72437494a905d47a6b6b5de3
+    m_Address: terrain/rock/kv-17
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c79601899287a0e4d81840335e461681
+    m_Address: terrain/rock/kv-10
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 01bd5781ce1afe3449f2a4e9c1355870
+    m_Address: terrain/grass/kv-01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a0b5aa5ccceb514baf2a04e815f1905
+    m_Address: terrain/rock/kv-08
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2a8487545b426e47949a24ba9411fc0
+    m_Address: terrain/rock/kv-23
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7232537639ccf8458d4d4d2753cb34a
+    m_Address: terrain/plant/kv-02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28b54b247595b334fba4621ac905ab0f
+    m_Address: terrain/rock/kv-04
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e124d7dceaa32a74196a01f3b29d5522
+    m_Address: terrain/pine/kv-02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca11caf12132e00459f7defc710bd393
+    m_Address: terrain/rock/kv-20
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 609895fdfc5823743a4ae26c4b777f53, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 76c71535e0e6d6740b43a6cfb4468aa1, type: 2}
+    - {fileID: 11400000, guid: dce8a92c365eee0409c593293f53a396, type: 2}

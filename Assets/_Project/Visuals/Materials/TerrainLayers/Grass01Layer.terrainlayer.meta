@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3e99017396cc26842b931bda631d15d3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 240055
+  packageName: Cartoon Army Universe
+  packageVersion: 1.0
+  assetPath: Assets/CartoonArmyUniverse/Materials/TerrainLayers/Grass01Layer.terrainlayer
+  uploadId: 545653
