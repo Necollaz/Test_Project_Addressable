@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public class AssetLivePreviewer
 {
     private const float UI_SPRITE_MAX_SIZE = 250f;
-    
+
     private readonly AssetTypeProbe typeProbe;
     private readonly PrefabPreviewRenderer prefabPreviewRenderer;
     private readonly PreviewPanelSwitcher panelSwitcher;
@@ -17,7 +18,8 @@ public class AssetLivePreviewer
     private AsyncOperationHandle? _currentPreviewHandle;
     private string _currentPreviewKey;
 
-    public AssetLivePreviewer(AssetTypeProbe typeProbe, PrefabPreviewRenderer prefabPreviewRenderer, PreviewPanelSwitcher panelSwitcher,
+    public AssetLivePreviewer(AssetTypeProbe typeProbe, PrefabPreviewRenderer prefabPreviewRenderer,
+        PreviewPanelSwitcher panelSwitcher,
         Image spritePreviewImage, AddressableKeyNormalizer keyNormalizer)
     {
         this.typeProbe = typeProbe;
@@ -31,27 +33,41 @@ public class AssetLivePreviewer
     {
         if (string.IsNullOrWhiteSpace(key))
         {
+            Debug.Log("[Preview] Empty key → hide all");
             panelSwitcher.TryHideAll();
             ReleasePreviewIfAny();
-            
             return;
         }
 
         if (string.Equals(_currentPreviewKey, key, System.StringComparison.Ordinal))
+        {
+            Debug.Log($"[Preview] Same key '{key}' → skip");
             return;
+        }
 
         ReleasePreviewIfAny();
 
-        await Addressables.InitializeAsync().Task;
+        try
+        {
+            await Addressables.InitializeAsync().Task;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[Preview] Addressables.Initialize failed: {e.Message}");
+            panelSwitcher.TryHideAll();
+            return;
+        }
 
         var probeKey = keyNormalizer.Normalize(key);
         var (hasSprite, hasPrefab) = await typeProbe.ProbeExactAsync(probeKey);
+        Debug.Log($"[Preview] Probe '{key}': sprite={hasSprite}, prefab={hasPrefab}");
 
         if (hasSprite)
         {
             var handle = Addressables.LoadAssetAsync<Sprite>(key);
             await handle.Task;
 
+            Debug.Log($"[Preview] Load Sprite '{key}' status={handle.Status}");
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 _currentPreviewHandle = handle;
@@ -61,7 +77,6 @@ public class AssetLivePreviewer
                 {
                     ApplySpritePreviewSizing(key);
                     spritePreviewImage.sprite = handle.Result;
-
                     if (!key.StartsWith(GroupNameKeys.KEY_GROUP_UI, System.StringComparison.OrdinalIgnoreCase))
                         spritePreviewImage.SetNativeSize();
                 }
@@ -70,15 +85,20 @@ public class AssetLivePreviewer
             }
             else
             {
+                Debug.LogError($"[Preview] Sprite load failed for '{key}': {handle.OperationException?.Message}");
                 Addressables.Release(handle);
                 panelSwitcher.TryHideAll();
             }
+
+            return;
         }
-        else if (hasPrefab)
+
+        if (hasPrefab)
         {
             var handle = Addressables.LoadAssetAsync<GameObject>(key);
             await handle.Task;
 
+            Debug.Log($"[Preview] Load Prefab '{key}' status={handle.Status}");
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 _currentPreviewHandle = handle;
@@ -90,14 +110,16 @@ public class AssetLivePreviewer
             }
             else
             {
+                Debug.LogError($"[Preview] Prefab load failed for '{key}': {handle.OperationException?.Message}");
                 Addressables.Release(handle);
                 panelSwitcher.TryHideAll();
             }
+
+            return;
         }
-        else
-        {
-            panelSwitcher.TryHideAll();
-        }
+
+        Debug.LogWarning($"[Preview] Key '{key}' is neither sprite nor prefab → hide all");
+        panelSwitcher.TryHideAll();
     }
 
     public void ReleasePreviewIfAny()
@@ -105,7 +127,7 @@ public class AssetLivePreviewer
         if (_currentPreviewHandle.HasValue)
         {
             var h = _currentPreviewHandle.Value;
-            
+
             if (h.IsValid())
                 Addressables.Release(h);
         }

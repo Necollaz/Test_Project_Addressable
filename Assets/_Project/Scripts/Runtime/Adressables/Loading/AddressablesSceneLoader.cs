@@ -6,6 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 
 public class AddressablesSceneLoader
 {
@@ -31,7 +32,7 @@ public class AddressablesSceneLoader
         }
         catch (Exception e)
         {
-            UnityEngine.Debug.LogError($"[SceneLoader] GetDownloadSize failed for '{sceneKey}': {e.Message}");
+            Debug.LogError($"[SceneLoader] GetDownloadSize failed for '{sceneKey}': {e.Message}");
             throw;
         }
 
@@ -39,7 +40,7 @@ public class AddressablesSceneLoader
 
         if (depsBytes > 0)
         {
-            UnityEngine.Debug.Log($"[SceneLoader] Downloading deps for '{sceneKey}'… ({depsBytes} B expected)");
+            Debug.Log($"[SceneLoader] Downloading deps for '{sceneKey}'… ({depsBytes} B expected)");
             var deps = Addressables.DownloadDependenciesAsync(sceneKey, true);
 
             while (!deps.IsDone)
@@ -74,13 +75,12 @@ public class AddressablesSceneLoader
 
         if (load.Status != AsyncOperationStatus.Succeeded)
         {
-            Exception exception = load.OperationException ??
-                                  new InvalidKeyException($"Key '{sceneKey}' is not a Scene (SceneInstance).");
+            var msg = load.OperationException?.Message ?? "Unknown";
+            Debug.LogError($"[SceneLoader] LoadSceneAsync FAIL '{sceneKey}': {msg}");
             Addressables.Release(load);
             _currentSceneHandle = null;
             _currentProgress = 0f;
-
-            throw exception;
+            throw load.OperationException ?? new InvalidKeyException($"Key '{sceneKey}' is not a Scene (SceneInstance).");
         }
 
         _currentSceneHandle = load;
@@ -103,13 +103,13 @@ public class AddressablesSceneLoader
                 }
                 catch (Exception e)
                 {
-                    UnityEngine.Debug.LogWarning($"[SceneLoader] Unload previous scene failed: {e.Message}");
+                    Debug.LogWarning($"[SceneLoader] Unload previous scene failed: {e.Message}");
                 }
             }
         }
 
         swTotal.Stop();
-        UnityEngine.Debug.Log($"[SceneLoader] Scene '{sceneKey}' loaded in {swTotal.ElapsedMilliseconds} ms");
+        Debug.Log($"[SceneLoader] Scene '{sceneKey}' loaded in {swTotal.ElapsedMilliseconds} ms");
     }
 
     public async Task UnloadCurrentSceneAsync()
