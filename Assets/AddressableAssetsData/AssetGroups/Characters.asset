@@ -10,232 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Characters
+  m_Name: characters
   m_EditorClassIdentifier: 
-  m_GroupName: Characters
+  m_GroupName: characters
   m_Data:
     m_SerializedData: []
   m_GUID: fbfd1cd09eaf7ff499099c6bda438af0
   m_SerializeEntries:
   - m_GUID: 9644ad614be9b23468e1b8818d60ed2b
-    m_Address: character/botPlayer/kv-3
+    m_Address: character/botPlayer/kv-2-green
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 95edc6044db71ff4a9345c44e076a62f
-    m_Address: character/jeep/kv-5
+  - m_GUID: c8d5c25ed1252f74f9239cebd0349956
+    m_Address: character/botPlayer/kv-1-blue
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0d2fac80c9a39f84f8939daeaa9c04cd
-    m_Address: character/jeep/kv-7
+  - m_GUID: 5881c752343669748a1b3738a9861b7c
+    m_Address: character/botPlayer/kv-2-red
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 878ed43b6381f26439be3b802cea91db
-    m_Address: character/jeep/kv-10
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b8def8e9d0950c34b90d8c711c8121af
-    m_Address: character/jeep/kv-12
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 15a868620b17e82409c500d501ed02b6
-    m_Address: character/botPlayer/kv-2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1a3c161aef415f646acf16f8f2c85374
-    m_Address: character/botPlayer/kv-4
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5f6c6cf825a99814495f8981d8870c96
-    m_Address: character/jeep/kv-1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 90ce57a4c0053f44ab6723459d6cba1f
-    m_Address: character/botPlayer/kv-1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5c4620ed0b3641748823fc3fe4e570b1
-    m_Address: character/jeep/kv-3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c79b6cf399c85f8408fd0ec9e0e7b8ae
-    m_Address: character/jeep/kv-4
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7817216b05dca2043b27397686cb2f8f
-    m_Address: character/jeep/kv-8
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d6dc9fed09cd14f4da9f92906f1cc7cc
-    m_Address: character/jeep/kv-11
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 720045d10f592064e9d04df52ade737e
-    m_Address: character/jeep/kv-2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2c8dc333b6b85de469776e6885d4239f
-    m_Address: character/jeep/kv-9
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5ef5109e79c803f4c95da8402bfe67f7
-    m_Address: character/jeep/kv-6
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 02d8d61efd6f57f47b847a55f2a9bff4
-    m_Address: character/tank/kv-1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a2bd5b2606896b34f9fff682d127fad1
-    m_Address: character/tank/kv-10
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 15ab5574402efc44fa3551c123b41ff4
-    m_Address: character/tank/kv-4
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 025f3820e4fa4744580d67fb55eb3bc3
-    m_Address: character/tank/kv-7
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9fd93b973b0c1e242b8c62f3bdfd1742
-    m_Address: character/tank/kv-8
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e979f86af767bfc4f9e00aa597b92890
-    m_Address: character/tank/kv-11
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4c14a9d07ec513a478bb08e415c798a1
-    m_Address: character/tank/kv-5
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 86fb167630c7c7e4298fa46f2cc6f244
-    m_Address: character/tank/kv-9
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 54c0f6c65d9be5e42847b1a77000c2bb
-    m_Address: character/tank/kv-12
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e8ccd227817011047a5bd1554196a7fb
-    m_Address: character/tank/kv-2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b166d944c4d69174fa810633f80eb815
-    m_Address: character/tank/kv-3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f4e9d88d127e16c418f0248892f16511
-    m_Address: character/tank/kv-6
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 53f175c3eecd9fa4a9d31e590de501ea
-    m_Address: character/truck/kv-12
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3b162cdc0077d1c44a3c11668c0ba871
-    m_Address: character/truck/kv-2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9cc5d34bf6581fb43bcefef5193d9fee
-    m_Address: character/truck/kv-4
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4f3c2fd540461ad4ea133ecc828f3072
-    m_Address: character/truck/kv-9
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4120bfa4a94780a47beaf5c18919851e
-    m_Address: character/truck/kv-7
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1c3e1ef3ac0f4d348b8b73edad8695b6
-    m_Address: character/truck/kv-6
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f979d1befc382d1429cedc18a7ef0c62
-    m_Address: character/truck/kv-5
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fd9a29ccf3d8ad740b2a05eaa2bf7520
-    m_Address: character/truck/kv-8
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 468347a1059b4d84f878ae667281b734
-    m_Address: character/truck/kv-13
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8f3b89a619f71704da4897df453734c0
-    m_Address: character/truck/kv-3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6972edd4d3a311445955f5fe0b06ffd7
-    m_Address: character/truck/kv-10
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 69decfaa3400166498e5e5ae2f426f8b
-    m_Address: character/truck/kv-11
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 319f778d5452eaf4cadc38e08f548701
-    m_Address: character/truck/kv-1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 11f1274cb2aaf824f9ac818411f020ea
-    m_Address: character/truck/parts/kv-2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 402cef532ccb95b4bb756edaf1dd14a7
-    m_Address: character/truck/parts/kv-3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 511e2da800852dd4ca7d658085160f8a
-    m_Address: character/truck/parts/kv-1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 609895fdfc5823743a4ae26c4b777f53, type: 2}

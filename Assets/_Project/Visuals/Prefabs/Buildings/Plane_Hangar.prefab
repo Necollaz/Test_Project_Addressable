@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3497188543001005069}
   - component: {fileID: 515479527609795496}
   - component: {fileID: 2360922700043253602}
-  - component: {fileID: 6011210853705118755}
+  - component: {fileID: -2023855128193859174}
   m_Layer: 0
   m_Name: Plane_Hangar
   m_TagString: Untagged
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 966837035c84d1b429885295687b98fb, type: 2}
+  - {fileID: 2100000, guid: d53bda02129d87c4f8c6edcc6c117a00, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6011210853705118755
-MeshCollider:
+--- !u!65 &-2023855128193859174
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8108960193840980781, guid: 50e9b22e8998c4543bff2a534f70adb4, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 3.9576435, y: 2.3763552, z: 4.0319877}
+  m_Center: {x: 0.06921524, y: 1.1881745, z: 0}

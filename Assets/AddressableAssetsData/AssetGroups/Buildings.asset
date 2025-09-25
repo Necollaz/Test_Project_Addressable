@@ -10,292 +10,102 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Buildings
+  m_Name: buildings
   m_EditorClassIdentifier: 
-  m_GroupName: Buildings
+  m_GroupName: buildings
   m_Data:
     m_SerializedData: []
   m_GUID: 053d68386b5877a42a996f20e3fdf0fe
   m_SerializeEntries:
-  - m_GUID: 9666a4666eea38641a7f986e486806bc
-    m_Address: buildings/bunker/kv-02
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 559febbb6934ad04fa621713501dabe3
-    m_Address: buildings/bunker/kv-06
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d35c5dcf55a6d1842972fbeb01077602
-    m_Address: buildings/base/kv-01
+    m_Address: buildings/base/kv-01-blue
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0d53d206041555841a8714638e466f9c
-    m_Address: buildings/bunker/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c8646bc722c027847a7f2f0ac98c990e
-    m_Address: buildings/bunker/kv-05
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a384b5bf5da250041950d61f8367a13a
-    m_Address: buildings/bunker/kv-07
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 04d2f7eec9f120f4ba7cd984d21f6774
-    m_Address: buildings/base/kv-03
+    m_Address: buildings/base/kv-03-red
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d9a5b055e19dd274e9c2e5593a757c4a
-    m_Address: buildings/base/kv-04
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 94d7a9f33d39dd44894c86803153e62c
-    m_Address: buildings/base/kv-02
+    m_Address: buildings/base/kv-02-green
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 57b52a06a918ec0489849329993415b4
-    m_Address: buildings/bunker/kv-04
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e09f7003ce162c44199b66d6326a5f98
-    m_Address: buildings/bunker/kv-03
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0f31900b65e0f3044adf9137790a9980
-    m_Address: buildings/bunker/kv-08
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0c01b05242c0fc64dab522689f0f17b3
-    m_Address: buildings/factory/kv-01
+    m_Address: buildings/factory/kv-01-blue
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2a2bf0bd89a010846b9f6ca2dbe17852
-    m_Address: buildings/headquarters/kv-01
+    m_Address: buildings/headquarters/kv-01-blue
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8a5e58448751f594aaf2970c552244af
-    m_Address: buildings/headquarters/kv-02
+    m_Address: buildings/headquarters/kv-02-green
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6d313af3cd23f3d49a3326d8266fb6d5
-    m_Address: buildings/factory/kv-02
+    m_Address: buildings/factory/kv-02-green
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8454ed415ed6bd746ae93fca91bfd903
-    m_Address: buildings/house/kv-04
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f45f75438d0e4e54c983757e010f27e9
-    m_Address: buildings/factory/kv-03
+    m_Address: buildings/factory/kv-03-red
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b4c4ec39e557dc04db08c4afbcf86889
-    m_Address: buildings/house/element/kv-05
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3c1d2a16d94ceca43b0e64999949d913
-    m_Address: buildings/house/element/kv-03
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c01c3ecb076c52646bc6541f9224361d
-    m_Address: buildings/house/kv-05
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 59a2f206fd4c9d64bb3ac577acb32b20
-    m_Address: buildings/house/kv-03
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d6d24a88cd2c2bc4692a6c6e52a08bae
-    m_Address: buildings/house/kv-06
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6569e9486679ded4cb17112165a5f8c3
-    m_Address: buildings/house/element/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a9a97b62500b6d0498cdbb61a78a3dd1
-    m_Address: buildings/fence/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 757fd05039813d242adcee74b42ebd3c
-    m_Address: buildings/house/element/kv-02
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 60ac16028f4b0d941be5115b1740059d
-    m_Address: buildings/house/element/kv-04
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9dc62baf55f82b14bb50280a40ca1867
-    m_Address: buildings/headquarters/kv-03
+    m_Address: buildings/headquarters/kv-03-red
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3eb47de8227fdba4aaeb060934684d5b
-    m_Address: buildings/bag/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 12021939d8cce344b9263bd10f2a09de
-    m_Address: buildings/fence/kv-02
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 732c897fc7f495c468dd9c8a379dc504
-    m_Address: buildings/navalBase/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1bc6772d4b3673c4e89f9932c71e9a73
-    m_Address: buildings/powerPlant/kv-01
+    m_Address: buildings/powerPlant/kv-01-blue
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d96f022a218b4c24f9f44ef1294cab49
-    m_Address: buildings/house/element/kv-10
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4d332dde7f5ecb74a9703681cc856d0b
-    m_Address: buildings/navalBase/kv-02
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dce6b16ec00429e4a8a75ef36ed6a65e
-    m_Address: buildings/house/kv-02
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bc0f05bade1acd842b5c97455a2cfac8
-    m_Address: buildings/house/element/kv-07
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3a23b94a9d5afad428015ad06e73bef4
-    m_Address: buildings/house/kv-07
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2cd586c42b9155744892b8746be39f71
-    m_Address: buildings/igalo/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 99bead32e2b433c418f3a18f0d8fc7b3
-    m_Address: buildings/house/kv-09
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 41cf9884f4c454f4a9a6d1afcb0c7c9a
-    m_Address: buildings/navalBase/kv-03
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4f6f423ce3aa3d044b199a7ce6dd8fee
-    m_Address: buildings/house/kv-10
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: be05e7e520600e04b90c3255c242dcde
-    m_Address: buildings/powerPlant/kv-02
+    m_Address: buildings/powerPlant/kv-02-green
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 374eafa525d4d0e4bbf3f948cc9d9359
-    m_Address: buildings/house/element/kv-09
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 23bbd02a62fdf0d40b14f4fbb3276b6b
-    m_Address: buildings/house/kv-12
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 00b4b1f2c2bef804a86a7339f5e7b3ff
-    m_Address: buildings/house/kv-11
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 43b07fb415be05641a6ba774077082a8
-    m_Address: buildings/powerPlant/kv-03
+    m_Address: buildings/powerPlant/kv-03-red
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 15958deccdfdbdd4b8c780c5070a9757
-    m_Address: buildings/house/element/kv-06
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 98a1c4f0a1b2a8242af71d6f5c597e40
-    m_Address: buildings/house/element/kv-08
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 276ec4e2e86d50d4fb1e82e5115828ae
-    m_Address: buildings/house/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 30b788dae5dc7f24981dcf209ef400c2
-    m_Address: buildings/house/kv-08
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aeb73bca3dfa92b469c1b01d9fc4016a
-    m_Address: buildings/hangar/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 89b754a1a3a6681478c0dc7b788d795d
-    m_Address: buildings/storage/kv-03
+    m_Address: buildings/storage/kv-01-blue
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3b0caea8ea083a64f8c16694c81a0b85
-    m_Address: buildings/house/element/kv-11
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 43c9c427c5de07d4d99e195c83d901f9
-    m_Address: buildings/tower/kv-01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d288ec31b2ef6bc45b6e7502c49f4c36
-    m_Address: buildings/storage/kv-02
+    m_Address: buildings/storage/kv-02-green
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2ae935f873127d04280a19b1f5a4d9e5
-    m_Address: buildings/storage/kv-01
+    m_Address: buildings/storage/kv-03-red
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - mutable_content
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 609895fdfc5823743a4ae26c4b777f53, type: 2}
