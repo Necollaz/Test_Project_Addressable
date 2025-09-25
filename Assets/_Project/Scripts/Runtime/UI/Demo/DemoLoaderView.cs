@@ -68,7 +68,7 @@ public class DemoLoaderView : MonoBehaviour
         _allowedKeyFilter = new AllowedKeyFilter(new[]
         {
             GroupNameKeys.KEY_GROUP_CHARACTERS, GroupNameKeys.KEY_GROUP_CHARACTER, GroupNameKeys.KEY_GROUP_UI,
-            GroupNameKeys.KEY_GROUP_BUILDINGS, GroupNameKeys.KEY_GROUP_EFFECTS
+            GroupNameKeys.KEY_GROUP_BUILDINGS, GroupNameKeys.KEY_GROUP_EFFECTS, GroupNameKeys.KEY_GROUP_SCENES
         });
         _keyCatalog = new AddressableKeyCatalog(_allowedKeyFilter);
         _assetKeyListProvider = new AssetKeyListProvider(_keyCatalog);
