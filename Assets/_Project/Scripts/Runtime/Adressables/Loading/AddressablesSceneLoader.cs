@@ -20,63 +20,96 @@ public class AddressablesSceneLoader
 
     public async Task LoadSceneAsync(string sceneKey, LoadSceneMode loadSceneMode)
     {
-        long dependenciesSizeBytes = await Addressables.GetDownloadSizeAsync(sceneKey).Task;
-        var sceneStopwatch = Stopwatch.StartNew();
+        if (string.IsNullOrWhiteSpace(sceneKey))
+            throw new ArgumentException("Scene key is null or empty.", nameof(sceneKey));
 
-        if (dependenciesSizeBytes > 0)
+        long depsBytes = 0;
+
+        try
         {
-            var downloadDependenciesHandle = Addressables.DownloadDependenciesAsync(sceneKey, true);
+            depsBytes = await Addressables.GetDownloadSizeAsync(sceneKey).Task;
+        }
+        catch (Exception e)
+        {
+            UnityEngine.Debug.LogError($"[SceneLoader] GetDownloadSize failed for '{sceneKey}': {e.Message}");
+            throw;
+        }
 
-            while (!downloadDependenciesHandle.IsDone)
+        var swTotal = Stopwatch.StartNew();
+
+        if (depsBytes > 0)
+        {
+            UnityEngine.Debug.Log($"[SceneLoader] Downloading deps for '{sceneKey}'… ({depsBytes} B expected)");
+            var deps = Addressables.DownloadDependenciesAsync(sceneKey, true);
+
+            while (!deps.IsDone)
             {
-                _currentProgress = downloadDependenciesHandle.PercentComplete * DEPENDENCIES_PROGRESS_PORTION;
+                _currentProgress = deps.PercentComplete * DEPENDENCIES_PROGRESS_PORTION;
                 await Task.Yield();
             }
 
-            if (downloadDependenciesHandle.Status != AsyncOperationStatus.Succeeded)
+            if (deps.Status != AsyncOperationStatus.Succeeded)
             {
-                Exception exception = downloadDependenciesHandle.OperationException ??
-                                      new InvalidOperationException($"Failed to download dependencies for '{sceneKey}'.");
-                Addressables.Release(downloadDependenciesHandle);
+                Exception exception = deps.OperationException ??
+                                      new InvalidOperationException($"Failed to download deps for '{sceneKey}'.");
+                Addressables.Release(deps);
                 _currentProgress = 0f;
-                
+
                 throw exception;
             }
 
-            Addressables.Release(downloadDependenciesHandle);
+            Addressables.Release(deps);
         }
-        
-        var previousHandle = _currentSceneHandle;
-        var loadSceneHandle = Addressables.LoadSceneAsync(sceneKey, loadSceneMode, true);
 
-        while (!loadSceneHandle.IsDone)
+        var previous = _currentSceneHandle;
+        UnityEngine.Debug.Log($"[SceneLoader] Loading scene '{sceneKey}' ({loadSceneMode})…");
+
+        var load = Addressables.LoadSceneAsync(sceneKey, loadSceneMode, true);
+
+        while (!load.IsDone)
         {
-            _currentProgress = DEPENDENCIES_PROGRESS_PORTION + loadSceneHandle.PercentComplete * SCENE_PROGRESS_PORTION;
+            _currentProgress = DEPENDENCIES_PROGRESS_PORTION + load.PercentComplete * SCENE_PROGRESS_PORTION;
             await Task.Yield();
         }
 
-        if (loadSceneHandle.Status != AsyncOperationStatus.Succeeded)
+        if (load.Status != AsyncOperationStatus.Succeeded)
         {
-            Exception exception = loadSceneHandle.OperationException ?? new InvalidKeyException(
-                                      $"Key '{sceneKey}' is not a scene. Make sure the Addressable is a Scene asset (SceneInstance).");
-            
-            Addressables.Release(loadSceneHandle);
+            Exception exception = load.OperationException ??
+                                  new InvalidKeyException($"Key '{sceneKey}' is not a Scene (SceneInstance).");
+            Addressables.Release(load);
+            _currentSceneHandle = null;
             _currentProgress = 0f;
-            
+
             throw exception;
         }
-        
-        _currentSceneHandle = loadSceneHandle;
+
+        _currentSceneHandle = load;
         _currentProgress = PROGRESS_COMPLETE_VALUE;
-        sceneStopwatch.Stop();
-        
-        if (previousHandle.HasValue)
+
+        if (previous.HasValue)
         {
-            var preview = previousHandle.Value;
-            
+            var preview = previous.Value;
+
             if (preview.IsValid())
-                Addressables.Release(preview);
+            {
+                try
+                {
+                    var unloadPrev = Addressables.UnloadSceneAsync(preview, true);
+
+                    while (!unloadPrev.IsDone)
+                        await Task.Yield();
+
+                    Addressables.Release(preview);
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogWarning($"[SceneLoader] Unload previous scene failed: {e.Message}");
+                }
+            }
         }
+
+        swTotal.Stop();
+        UnityEngine.Debug.Log($"[SceneLoader] Scene '{sceneKey}' loaded in {swTotal.ElapsedMilliseconds} ms");
     }
 
     public async Task UnloadCurrentSceneAsync()
@@ -109,7 +142,7 @@ public class AddressablesSceneLoader
     {
         var completionSource = new TaskCompletionSource<bool>();
         operation.completed += _ => completionSource.SetResult(true);
-        
+
         return completionSource.Task;
     }
 }

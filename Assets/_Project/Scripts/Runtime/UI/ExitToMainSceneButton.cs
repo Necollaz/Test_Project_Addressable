@@ -5,7 +5,7 @@ using Zenject;
 public class ExitToMainSceneButton : MonoBehaviour
 {
     [SerializeField] private Button _exitButton;
-    [SerializeField] private string _mainSceneKey = "scenes/Main";
+    [SerializeField] private string _mainSceneKey = "scenes/main";
 
     private AddressablesSceneLoader _sceneLoader;
     private AddressablesAssetLoader _assetLoader;
@@ -31,7 +31,25 @@ public class ExitToMainSceneButton : MonoBehaviour
 
     private async void ExitToMainScene()
     {
-        await _assetLoader.UnloadAllAssetsAsync();
-        await _sceneLoader.LoadSceneAsync(_mainSceneKey, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        if (string.IsNullOrWhiteSpace(_mainSceneKey))
+        {
+            Debug.LogError("[ExitToMain] Main scene key is empty.");
+            return;
+        }
+
+        try
+        {
+            Debug.Log("[ExitToMain] Unloading assets…");
+            await _assetLoader.UnloadAllAssetsAsync();
+
+            Debug.Log($"[ExitToMain] Loading '{_mainSceneKey}'…");
+            await _sceneLoader.LoadSceneAsync(_mainSceneKey, UnityEngine.SceneManagement.LoadSceneMode.Single);
+
+            Debug.Log("[ExitToMain] Done.");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[ExitToMain] Failed: {e.Message}");
+        }
     }
 }

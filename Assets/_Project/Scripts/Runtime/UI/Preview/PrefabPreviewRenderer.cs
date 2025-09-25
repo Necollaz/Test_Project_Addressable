@@ -35,6 +35,7 @@ public class PrefabPreviewRenderer : MonoBehaviour
     private CameraOverrideSelector _cameraOverrideSelector;
     private CameraTransformApplier _cameraTransformApplier;
     
+    private int _previewLayer = -1;
     private bool _overrideAppliedCurrentKey;
 
     private void Awake()
@@ -48,6 +49,18 @@ public class PrefabPreviewRenderer : MonoBehaviour
         _cameraOverrideSelector = new CameraOverrideSelector(_cameraGroupOverrides);
         _cameraTransformApplier = new CameraTransformApplier();
 
+        _previewLayer = LayerMask.NameToLayer(LAYER_NAME_PREVIEW_3D);
+        
+        if (_previewLayer < 0)
+        {
+            Debug.LogWarning("[Preview3D] Layer 'Preview3D' not found in build. Falling back to Default layer.");
+            
+            _previewLayer = 0;
+
+            if (_previewCamera != null)
+                _previewCamera.cullingMask = ~0; // Everything
+        }
+        
         EnsureRenderTarget();
 
         if (_previewCamera != null)
@@ -74,7 +87,7 @@ public class PrefabPreviewRenderer : MonoBehaviour
         }
 
         _currentPreviewInstance = Instantiate(sourcePrefab, _previewRootTransform);
-        _hierarchyLayerSetter.SetLayerRecursively(_currentPreviewInstance, LayerMask.NameToLayer(LAYER_NAME_PREVIEW_3D));
+        _hierarchyLayerSetter.SetLayerRecursively(_currentPreviewInstance, _previewLayer >= 0 ? _previewLayer : 0);
 
         Bounds bounds = _rendererBoundsCalculator.Calculate(_currentPreviewInstance);
 
@@ -86,6 +99,15 @@ public class PrefabPreviewRenderer : MonoBehaviour
 
         if (_previewCamera != null)
             _previewCamera.enabled = true;
+        
+        if (_targetRawImage != null && _previewCamera != null)
+        {
+            if (_previewCamera.targetTexture == null)
+                _previewCamera.targetTexture = _renderTexture;
+            
+            if (_targetRawImage.texture != _renderTexture)
+                _targetRawImage.texture = _renderTexture;
+        }
     }
 
     public void Clear()
@@ -145,5 +167,8 @@ public class PrefabPreviewRenderer : MonoBehaviour
 
         if (_targetRawImage != null && _targetRawImage.texture != _renderTexture)
             _targetRawImage.texture = _renderTexture;
+
+        if (_renderTexture != null && !_renderTexture.IsCreated())
+            _renderTexture.Create();
     }
 }
