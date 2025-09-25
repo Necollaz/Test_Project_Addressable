@@ -58,7 +58,7 @@ public class PrefabPreviewRenderer : MonoBehaviour
             _previewLayer = 0;
 
             if (_previewCamera != null)
-                _previewCamera.cullingMask = ~0; // Everything
+                _previewCamera.cullingMask = ~0;
         }
         
         EnsureRenderTarget();
