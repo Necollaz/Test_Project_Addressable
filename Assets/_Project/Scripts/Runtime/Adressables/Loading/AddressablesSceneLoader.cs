@@ -40,7 +40,6 @@ public class AddressablesSceneLoader
 
         if (depsBytes > 0)
         {
-            Debug.Log($"[SceneLoader] Downloading deps for '{sceneKey}'… ({depsBytes} B expected)");
             var deps = Addressables.DownloadDependenciesAsync(sceneKey, true);
 
             while (!deps.IsDone)
@@ -63,7 +62,7 @@ public class AddressablesSceneLoader
         }
 
         var previous = _currentSceneHandle;
-        UnityEngine.Debug.Log($"[SceneLoader] Loading scene '{sceneKey}' ({loadSceneMode})…");
+        Debug.Log($"[SceneLoader] Loading scene '{sceneKey}' ({loadSceneMode})…");
 
         var load = Addressables.LoadSceneAsync(sceneKey, loadSceneMode, true);
 
