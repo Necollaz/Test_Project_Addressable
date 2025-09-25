@@ -92,31 +92,24 @@ public class AddressablesAssetLoader
         }
 
         var sw = Stopwatch.StartNew();
-        var handle = Addressables.DownloadDependenciesAsync(keyOrLabel, true);
-
+        var handle = Addressables.DownloadDependenciesAsync(keyOrLabel, false);
         long lastBytes = 0;
         
-        try
-        {
-            while (!handle.IsDone)
-            {
+        try {
+            while (!handle.IsDone) {
                 var status = handle.GetDownloadStatus();
-                
-                if (status.TotalBytes > 0 && status.DownloadedBytes != lastBytes)
-                {
+                if (status.TotalBytes > 0 && status.DownloadedBytes != lastBytes) {
                     lastBytes = status.DownloadedBytes;
                     Debug.Log($"[Addressables][Deps] {keyOrLabel} {lastBytes}/{status.TotalBytes} B");
                 }
-
                 await Task.Yield();
             }
 
-            var finalStatus = handle.GetDownloadStatus();
+            var finalStatus = handle.GetDownloadStatus(); // читаем ДО Release
             sw.Stop();
             Debug.Log($"[Addressables][Deps][Done] {keyOrLabel} downloaded {finalStatus.DownloadedBytes} B in {sw.ElapsedMilliseconds} ms");
         }
-        finally
-        {
+        finally {
             if (handle.IsValid()) Addressables.Release(handle);
         }
 
