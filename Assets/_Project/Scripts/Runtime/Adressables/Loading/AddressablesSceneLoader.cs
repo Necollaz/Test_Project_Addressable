@@ -19,56 +19,18 @@ public class AddressablesSceneLoader
 
     public float CurrentSceneLoadingProgress => _currentProgress;
 
-    public async Task LoadSceneAsync(string sceneKey, LoadSceneMode loadSceneMode)
+    public async Task LoadSceneAsync(string sceneKey, LoadSceneMode mode)
     {
         if (string.IsNullOrWhiteSpace(sceneKey))
-            throw new ArgumentException("Scene key is null or empty.", nameof(sceneKey));
-
-        long depsBytes = 0;
-
-        try
-        {
-            depsBytes = await Addressables.GetDownloadSizeAsync(sceneKey).Task;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"[SceneLoader] GetDownloadSize failed for '{sceneKey}': {e.Message}");
-            throw;
-        }
+            throw new ArgumentException(nameof(sceneKey));
 
         var swTotal = Stopwatch.StartNew();
 
-        if (depsBytes > 0)
-        {
-            var deps = Addressables.DownloadDependenciesAsync(sceneKey, true);
-
-            while (!deps.IsDone)
-            {
-                _currentProgress = deps.PercentComplete * DEPENDENCIES_PROGRESS_PORTION;
-                await Task.Yield();
-            }
-
-            if (deps.Status != AsyncOperationStatus.Succeeded)
-            {
-                Exception exception = deps.OperationException ??
-                                      new InvalidOperationException($"Failed to download deps for '{sceneKey}'.");
-                Addressables.Release(deps);
-                _currentProgress = 0f;
-
-                throw exception;
-            }
-
-            Addressables.Release(deps);
-        }
-
-        var previous = _currentSceneHandle;
-        Debug.Log($"[SceneLoader] Loading scene '{sceneKey}' ({loadSceneMode})…");
-
-        var load = Addressables.LoadSceneAsync(sceneKey, loadSceneMode, true);
+        var load = Addressables.LoadSceneAsync(sceneKey, mode, activateOnLoad: true);
 
         while (!load.IsDone)
         {
-            _currentProgress = DEPENDENCIES_PROGRESS_PORTION + load.PercentComplete * SCENE_PROGRESS_PORTION;
+            _currentProgress = load.PercentComplete;
             await Task.Yield();
         }
 
@@ -76,38 +38,36 @@ public class AddressablesSceneLoader
         {
             var msg = load.OperationException?.Message ?? "Unknown";
             Debug.LogError($"[SceneLoader] LoadSceneAsync FAIL '{sceneKey}': {msg}");
-            Addressables.Release(load);
+            
+            if (load.IsValid())
+                Addressables.Release(load);
+            
             _currentSceneHandle = null;
             _currentProgress = 0f;
-            throw load.OperationException ?? new InvalidKeyException($"Key '{sceneKey}' is not a Scene (SceneInstance).");
+            
+            throw load.OperationException ?? new InvalidKeyException($"Key '{sceneKey}' is not a Scene.");
         }
 
+        var previous = _currentSceneHandle;
         _currentSceneHandle = load;
-        _currentProgress = PROGRESS_COMPLETE_VALUE;
-
-        if (previous.HasValue)
+        _currentProgress = 1f;
+        
+        if (previous.HasValue && previous.Value.IsValid())
         {
-            var preview = previous.Value;
-
-            if (preview.IsValid())
+            try
             {
-                try
-                {
-                    var unloadPrev = Addressables.UnloadSceneAsync(preview, true);
-
-                    while (!unloadPrev.IsDone)
-                        await Task.Yield();
-
-                    Addressables.Release(preview);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogWarning($"[SceneLoader] Unload previous scene failed: {e.Message}");
-                }
+                var unloadPrev = Addressables.UnloadSceneAsync(previous.Value, true);
+                while (!unloadPrev.IsDone) await Task.Yield();
+                Addressables.Release(previous.Value);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[SceneLoader] Unload previous scene failed: {e.Message}");
             }
         }
 
         swTotal.Stop();
+        
         Debug.Log($"[SceneLoader] Scene '{sceneKey}' loaded in {swTotal.ElapsedMilliseconds} ms");
     }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
@@ -44,9 +45,13 @@ public class SceneLoadingFlow
         try
         {
             await sceneLoader.LoadSceneAsync(sceneKey, LoadSceneMode.Single);
+            
+            Debug.Log($"[SceneFlow] Scene '{sceneKey}' loaded OK");
         }
-        catch (Exception _)
+        catch (Exception e)
         {
+            Debug.LogError($"[SceneFlow] FAIL loading '{sceneKey}': {e.Message}");
+            
             if (progressSlider != null)
                 progressSlider.value = 0f;
             

@@ -11,7 +11,10 @@ using Debug = UnityEngine.Debug;
 public class AddressablesAssetLoader
 {
     private readonly AddressablesDiagnostics addressablesDiagnostics;
-    private readonly Dictionary<string, AsyncOperationHandle> assetHandlesByKey = new Dictionary<string, AsyncOperationHandle>(256);
+
+    private readonly Dictionary<string, AsyncOperationHandle> assetHandlesByKey =
+        new Dictionary<string, AsyncOperationHandle>(256);
+
     private readonly HashSet<string> loadedAssetKeys = new HashSet<string>();
 
     [Inject]
@@ -28,14 +31,14 @@ public class AddressablesAssetLoader
             return assetHandlesByKey[assetKey].Result as TAsset;
 
         long expectedBytes = await GetExpectedDownloadBytesAsync(assetKey);
-        
+
         if (expectedBytes > 0)
             await EnsureDependenciesDownloadedWithLogsAsync(assetKey);
-        
+
         addressablesDiagnostics.StartTimer(assetKey);
 
         var loadHandle = Addressables.LoadAssetAsync<TAsset>(assetKey);
-        
+
         await loadHandle.Task;
 
         assetHandlesByKey[assetKey] = loadHandle;
@@ -70,48 +73,53 @@ public class AddressablesAssetLoader
     {
         var sizeHandle = Addressables.GetDownloadSizeAsync(keyOrLabel);
         long bytes = await sizeHandle.Task;
-        
+
         Addressables.Release(sizeHandle);
-        
+
         return bytes;
     }
 
     public async Task<bool> EnsureDependenciesDownloadedWithLogsAsync(object keyOrLabel)
     {
-        long expectedBytes = await GetExpectedDownloadBytesAsync(keyOrLabel);
-        
+        var sizeHandle = Addressables.GetDownloadSizeAsync(keyOrLabel);
+        long expectedBytes = await sizeHandle.Task;
+        Addressables.Release(sizeHandle);
+
         if (expectedBytes <= 0)
         {
             Debug.Log($"[Addressables][Deps] {keyOrLabel} expected 0 B (cached).");
-            
             return true;
         }
 
-        var stopwatch = Stopwatch.StartNew();
+        var sw = Stopwatch.StartNew();
         var handle = Addressables.DownloadDependenciesAsync(keyOrLabel, true);
 
         long lastBytes = 0;
         
-        while (!handle.IsDone)
+        try
         {
-            var status = handle.GetDownloadStatus();
-            
-            if (status.TotalBytes > 0 && status.DownloadedBytes != lastBytes)
+            while (!handle.IsDone)
             {
-                lastBytes = status.DownloadedBytes;
+                var status = handle.GetDownloadStatus();
                 
-                Debug.Log($"[Addressables][Deps] {keyOrLabel} {lastBytes}/{status.TotalBytes} B");
+                if (status.TotalBytes > 0 && status.DownloadedBytes != lastBytes)
+                {
+                    lastBytes = status.DownloadedBytes;
+                    Debug.Log($"[Addressables][Deps] {keyOrLabel} {lastBytes}/{status.TotalBytes} B");
+                }
+
+                await Task.Yield();
             }
-            
-            await Task.Yield();
+
+            var finalStatus = handle.GetDownloadStatus();
+            sw.Stop();
+            Debug.Log($"[Addressables][Deps][Done] {keyOrLabel} downloaded {finalStatus.DownloadedBytes} B in {sw.ElapsedMilliseconds} ms");
+        }
+        finally
+        {
+            if (handle.IsValid()) Addressables.Release(handle);
         }
 
-        stopwatch.Stop();
-        var finalStatus = handle.GetDownloadStatus();
-        Addressables.Release(handle);
-
-        Debug.Log($"[Addressables][Deps][Done] {keyOrLabel} downloaded {finalStatus.DownloadedBytes} B in {stopwatch.ElapsedMilliseconds} ms");
-        
         return true;
     }
 
@@ -119,7 +127,7 @@ public class AddressablesAssetLoader
     {
         var completionSource = new TaskCompletionSource<bool>();
         operation.completed += _ => completionSource.SetResult(true);
-        
+
         return completionSource.Task;
     }
 }
