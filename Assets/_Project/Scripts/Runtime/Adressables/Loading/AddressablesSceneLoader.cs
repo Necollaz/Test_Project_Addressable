@@ -77,6 +77,7 @@ public class AddressablesSceneLoader
         while (load.PercentComplete < 0.9f)
         {
             Debug.Log($"[Diag] Pre-activate progress: {load.PercentComplete:P0}");
+            
             await Task.Yield();
         }
 
@@ -86,6 +87,7 @@ public class AddressablesSceneLoader
         while (!activate.isDone)
         {
             Debug.Log($"[Diag] Activating... {activate.progress:P0}");
+            
             await Task.Yield();
         }
 
@@ -99,7 +101,7 @@ public class AddressablesSceneLoader
             throw load.OperationException ?? new Exception("Activation failed");
         }
 
-        Debug.Log($"[Diag] Activated. ActiveScene={UnityEngine.SceneManagement.SceneManager.GetActiveScene().name}");
+        Debug.Log($"[Diag] Activated. ActiveScene={SceneManager.GetActiveScene().name}");
     }
     
     // public async Task UnloadCurrentSceneAsync()

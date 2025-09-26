@@ -65,6 +65,7 @@ public class SceneLoadingFlow
             }
             
             var finStatus = downloadDependencies.GetDownloadStatus();
+            
             Debug.Log($"[SceneFlow][Deps] '{sceneKey}' {finStatus.DownloadedBytes} B");
         }
         
@@ -73,6 +74,7 @@ public class SceneLoadingFlow
         try
         {
             await sceneLoader.LoadSceneAsync(sceneKey, LoadSceneMode.Single);
+            
             Debug.Log($"[SceneFlow] Scene '{sceneKey}' loaded OK");
         }
         catch (Exception e)

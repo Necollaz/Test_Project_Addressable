@@ -88,6 +88,7 @@ public class AddressablesAssetLoader
         if (expectedBytes <= 0)
         {
             Debug.Log($"[Addressables][Deps] {keyOrLabel} expected 0 B (cached).");
+            
             return true;
         }
 
@@ -103,6 +104,7 @@ public class AddressablesAssetLoader
             if (status.TotalBytes > 0 && status.DownloadedBytes != lastBytes)
             {
                 lastBytes = status.DownloadedBytes;
+                
                 Debug.Log($"[Addressables][Deps] {keyOrLabel} {lastBytes}/{status.TotalBytes} B");
             }
             
