@@ -43,8 +43,7 @@ public class SceneLoadingFlow
             progressSlider.gameObject.SetActive(true);
             progressSlider.value = 0f;
         }
-
-        // докачка deps
+        
         var sizeHandle = Addressables.GetDownloadSizeAsync(sceneKey);
         long bytes = await sizeHandle.Task;
         Addressables.Release(sizeHandle);
@@ -62,11 +61,12 @@ public class SceneLoadingFlow
                 }
                 await Task.Yield();
             }
-            Addressables.Release(dl);
+            
+            var fin = dl.GetDownloadStatus();
+            Debug.Log($"[SceneFlow][Deps] '{sceneKey}' {fin.DownloadedBytes} B");
         }
-
+        
         var progressTask = TrackSceneProgressAsync();
-
         try
         {
             await sceneLoader.LoadSceneAsync(sceneKey, LoadSceneMode.Single);
