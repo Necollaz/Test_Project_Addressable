@@ -20,8 +20,7 @@ public class AddressablesSceneLoader
         if (sceneKey == null)
             throw new ArgumentNullException(nameof(sceneKey));
 
-        var sw = Stopwatch.StartNew();
-
+        var stopwatch = Stopwatch.StartNew();
         var previous = _currentSceneHandle;
         var load = Addressables.LoadSceneAsync(sceneKey, mode, activateOnLoad: true);
 
@@ -33,11 +32,16 @@ public class AddressablesSceneLoader
 
         if (load.Status != AsyncOperationStatus.Succeeded)
         {
-            var msg = load.OperationException?.Message ?? "Unknown";
-            Debug.LogError($"[SceneLoader] LoadSceneAsync FAIL '{sceneKey}': {msg}");
-            if (load.IsValid()) Addressables.Release(load);
+            var message = load.OperationException?.Message ?? "Unknown";
+            
+            Debug.LogError($"[SceneLoader] LoadSceneAsync FAIL '{sceneKey}': {message}");
+            
+            if (load.IsValid())
+                Addressables.Release(load);
+            
             _currentSceneHandle = null;
             _currentProgress = 0f;
+            
             throw load.OperationException ?? new InvalidKeyException($"Key '{sceneKey}' is not a Scene.");
         }
 
@@ -48,25 +52,29 @@ public class AddressablesSceneLoader
         {
             try
             {
-                var unloadPrev = Addressables.UnloadSceneAsync(previous.Value, true);
-                while (!unloadPrev.IsDone) await Task.Yield();
+                var unloadPreview = Addressables.UnloadSceneAsync(previous.Value, true);
+                
+                while (!unloadPreview.IsDone)
+                    await Task.Yield();
+                
                 Addressables.Release(previous.Value);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Debug.LogWarning($"[SceneLoader] Unload previous scene failed: {e.Message}");
+                Debug.LogWarning($"[SceneLoader] Unload previous scene failed: {exception.Message}");
             }
         }
 
-        sw.Stop();
-        Debug.Log($"[SceneLoader] Scene '{sceneKey}' loaded in {sw.ElapsedMilliseconds} ms | Active: {SceneManager.GetActiveScene().name}");
+        stopwatch.Stop();
+        
+        Debug.Log($"[SceneLoader] Scene '{sceneKey}' loaded in {stopwatch.ElapsedMilliseconds} ms | Active: {SceneManager.GetActiveScene().name}");
     }
 
     public async Task LoadSceneWithExplicitActivationAsync(string sceneKey, LoadSceneMode mode)
     {
         var load = Addressables.LoadSceneAsync(sceneKey, mode, activateOnLoad: false);
 
-        while (load.PercentComplete < 0.9f) // адресабл-сцены доходят до ~0.9 до активации
+        while (load.PercentComplete < 0.9f)
         {
             Debug.Log($"[Diag] Pre-activate progress: {load.PercentComplete:P0}");
             await Task.Yield();
@@ -84,7 +92,10 @@ public class AddressablesSceneLoader
         if (load.Status != AsyncOperationStatus.Succeeded)
         {
             Debug.LogError($"[Diag] FAIL: {load.OperationException}");
-            if (load.IsValid()) Addressables.Release(load);
+            
+            if (load.IsValid())
+                Addressables.Release(load);
+            
             throw load.OperationException ?? new Exception("Activation failed");
         }
 

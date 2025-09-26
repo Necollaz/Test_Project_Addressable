@@ -43,33 +43,33 @@ public class SceneLoadingFlow
             progressSlider.gameObject.SetActive(true);
             progressSlider.value = 0f;
         }
-
-        // CHANGE: аккуратная докачка deps с авто-Release
+        
         var sizeHandle = Addressables.GetDownloadSizeAsync(sceneKey);
         long bytes = await sizeHandle.Task;
         Addressables.Release(sizeHandle);
 
         if (bytes > 0)
         {
-            var dl = Addressables.DownloadDependenciesAsync(sceneKey, true); // auto-release
-            while (!dl.IsDone)
+            var downloadDependencies = Addressables.DownloadDependenciesAsync(sceneKey, true);
+            while (!downloadDependencies.IsDone)
             {
                 if (progressSlider != null)
                 {
-                    var st = dl.GetDownloadStatus();
-                    if (st.TotalBytes > 0)
-                        progressSlider.value = Mathf.Clamp01((float)st.DownloadedBytes / st.TotalBytes) * 0.85f;
+                    var status = downloadDependencies.GetDownloadStatus();
+                    
+                    if (status.TotalBytes > 0)
+                        progressSlider.value = Mathf.Clamp01((float)status.DownloadedBytes / status.TotalBytes) * 0.85f;
                 }
+                
                 await Task.Yield();
             }
-
-            // CHANGE: никаких Addressables.Release(dl)
-            var fin = dl.GetDownloadStatus();
-            Debug.Log($"[SceneFlow][Deps] '{sceneKey}' {fin.DownloadedBytes} B");
+            
+            var finStatus = downloadDependencies.GetDownloadStatus();
+            Debug.Log($"[SceneFlow][Deps] '{sceneKey}' {finStatus.DownloadedBytes} B");
         }
-
-        // дальше как было
+        
         var progressTask = TrackSceneProgressAsync();
+        
         try
         {
             await sceneLoader.LoadSceneAsync(sceneKey, LoadSceneMode.Single);
@@ -78,7 +78,10 @@ public class SceneLoadingFlow
         catch (Exception e)
         {
             Debug.LogError($"[SceneFlow] FAIL loading '{sceneKey}': {e}");
-            if (progressSlider != null) progressSlider.value = 0f;
+            
+            if (progressSlider != null)
+                progressSlider.value = 0f;
+            
             return;
         }
 

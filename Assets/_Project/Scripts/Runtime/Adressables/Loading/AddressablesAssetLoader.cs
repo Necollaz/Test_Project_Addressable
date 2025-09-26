@@ -91,25 +91,28 @@ public class AddressablesAssetLoader
             return true;
         }
 
-        var sw = Stopwatch.StartNew();
+        var stopwatch = Stopwatch.StartNew();
         
-        var dl = Addressables.DownloadDependenciesAsync(keyOrLabel, true);
+        var downloadDependencies = Addressables.DownloadDependenciesAsync(keyOrLabel, true);
         long lastBytes = -1;
 
-        while (!dl.IsDone)
+        while (!downloadDependencies.IsDone)
         {
-            var status = dl.GetDownloadStatus();
+            var status = downloadDependencies.GetDownloadStatus();
+            
             if (status.TotalBytes > 0 && status.DownloadedBytes != lastBytes)
             {
                 lastBytes = status.DownloadedBytes;
                 Debug.Log($"[Addressables][Deps] {keyOrLabel} {lastBytes}/{status.TotalBytes} B");
             }
+            
             await Task.Yield();
         }
         
-        var finalStatus = dl.GetDownloadStatus();
-        sw.Stop();
-        Debug.Log($"[Addressables][Deps][Done] {keyOrLabel} downloaded {finalStatus.DownloadedBytes} B in {sw.ElapsedMilliseconds} ms");
+        var finalStatus = downloadDependencies.GetDownloadStatus();
+        stopwatch.Stop();
+        
+        Debug.Log($"[Addressables][Deps][Done] {keyOrLabel} downloaded {finalStatus.DownloadedBytes} B in {stopwatch.ElapsedMilliseconds} ms");
 
         return true;
     }
