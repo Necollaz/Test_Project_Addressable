@@ -43,14 +43,15 @@ public class SceneLoadingFlow
             progressSlider.gameObject.SetActive(true);
             progressSlider.value = 0f;
         }
-        
+
+        // CHANGE: аккуратная докачка deps с авто-Release
         var sizeHandle = Addressables.GetDownloadSizeAsync(sceneKey);
         long bytes = await sizeHandle.Task;
         Addressables.Release(sizeHandle);
 
         if (bytes > 0)
         {
-            var dl = Addressables.DownloadDependenciesAsync(sceneKey, true);
+            var dl = Addressables.DownloadDependenciesAsync(sceneKey, true); // auto-release
             while (!dl.IsDone)
             {
                 if (progressSlider != null)
@@ -61,11 +62,13 @@ public class SceneLoadingFlow
                 }
                 await Task.Yield();
             }
-            
+
+            // CHANGE: никаких Addressables.Release(dl)
             var fin = dl.GetDownloadStatus();
             Debug.Log($"[SceneFlow][Deps] '{sceneKey}' {fin.DownloadedBytes} B");
         }
-        
+
+        // дальше как было
         var progressTask = TrackSceneProgressAsync();
         try
         {
