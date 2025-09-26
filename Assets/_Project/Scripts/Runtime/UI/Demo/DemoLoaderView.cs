@@ -225,21 +225,20 @@ public class DemoLoaderView : MonoBehaviour
         
         if (string.IsNullOrWhiteSpace(sceneKey))
             return;
+        
+        string probeKeyStr = _keyNormalizer.Normalize(sceneKey) as string ?? sceneKey;
 
-        var probeKey = _keyNormalizer.Normalize(sceneKey);
-        SceneLoadingFlow sceneFlow = new SceneLoadingFlow(_sceneLoader, _sceneProgressSlider);
+        var sceneFlow = new SceneLoadingFlow(_sceneLoader, _sceneProgressSlider);
 
-        if (!await sceneFlow.IsSceneKeyAsync(probeKey))
+        if (!await sceneFlow.IsSceneKeyAsync(probeKeyStr))
         {
             _sceneSelectionGate.UpdateInteractable(_loadSceneButton, _sceneKeyDropdown, sceneKeys);
-            
             return;
         }
 
-        await sceneFlow.LoadSceneByKeyAsync(sceneKey);
-        
+        await sceneFlow.LoadSceneByKeyAsync(probeKeyStr);
+
         _sceneSelectionGate.UpdateInteractable(_loadSceneButton, _sceneKeyDropdown, sceneKeys);
-        
         UpdateSceneLoadedOverlay();
     }
     

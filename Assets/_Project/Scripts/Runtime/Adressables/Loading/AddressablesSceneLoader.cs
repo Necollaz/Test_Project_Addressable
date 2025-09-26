@@ -17,8 +17,8 @@ public class AddressablesSceneLoader
 
     public async Task LoadSceneAsync(string sceneKey, LoadSceneMode mode)
     {
-        if (string.IsNullOrWhiteSpace(sceneKey))
-            throw new ArgumentException(nameof(sceneKey));
+        if (sceneKey == null)
+            throw new ArgumentNullException(nameof(sceneKey));
 
         var sw = Stopwatch.StartNew();
 
@@ -27,7 +27,7 @@ public class AddressablesSceneLoader
 
         while (!load.IsDone)
         {
-            _currentProgress = load.PercentComplete; // 0..1
+            _currentProgress = load.PercentComplete;
             await Task.Yield();
         }
 
@@ -44,7 +44,6 @@ public class AddressablesSceneLoader
         _currentSceneHandle = load;
         _currentProgress = 1f;
 
-        // корректно выгрузим предыдущую сцену, если была
         if (previous.HasValue && previous.Value.IsValid())
         {
             try

@@ -23,9 +23,13 @@ public class SceneLoadingFlow
     public async Task<bool> IsSceneKeyAsync(object keyOrLabel)
     {
         await Addressables.InitializeAsync().Task;
-        
         var handle = Addressables.LoadResourceLocationsAsync(keyOrLabel, typeof(SceneInstance));
         var locations = await handle.Task;
+        
+        Debug.Log($"[SceneFlow] Probe '{keyOrLabel}': {(locations == null ? 0 : locations.Count)} locations");
+        
+        if (locations != null)
+            foreach (var l in locations) Debug.Log($"[SceneFlow] -> {l.InternalId}");
         
         Addressables.Release(handle);
         
@@ -40,21 +44,38 @@ public class SceneLoadingFlow
             progressSlider.value = 0f;
         }
 
+        // докачка deps
+        var sizeHandle = Addressables.GetDownloadSizeAsync(sceneKey);
+        long bytes = await sizeHandle.Task;
+        Addressables.Release(sizeHandle);
+
+        if (bytes > 0)
+        {
+            var dl = Addressables.DownloadDependenciesAsync(sceneKey, true);
+            while (!dl.IsDone)
+            {
+                if (progressSlider != null)
+                {
+                    var st = dl.GetDownloadStatus();
+                    if (st.TotalBytes > 0)
+                        progressSlider.value = Mathf.Clamp01((float)st.DownloadedBytes / st.TotalBytes) * 0.85f;
+                }
+                await Task.Yield();
+            }
+            Addressables.Release(dl);
+        }
+
         var progressTask = TrackSceneProgressAsync();
 
         try
         {
             await sceneLoader.LoadSceneAsync(sceneKey, LoadSceneMode.Single);
-            
             Debug.Log($"[SceneFlow] Scene '{sceneKey}' loaded OK");
         }
         catch (Exception e)
         {
-            Debug.LogError($"[SceneFlow] FAIL loading '{sceneKey}': {e.Message}");
-            
-            if (progressSlider != null)
-                progressSlider.value = 0f;
-            
+            Debug.LogError($"[SceneFlow] FAIL loading '{sceneKey}': {e}");
+            if (progressSlider != null) progressSlider.value = 0f;
             return;
         }
 
